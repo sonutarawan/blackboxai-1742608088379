@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus Flow - Procrastination Management</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gradient-to-br from-gray-50 to-gray-100 font-[Inter] min-h-screen">
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-sm shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <h1 class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600">
+                <i class="fas fa-check-circle text-blue-500"></i> Focus Flow
+            </h1>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Task Management Section -->
+            <section class="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-8 transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                <h2 class="text-xl font-semibold mb-4">
+                    <i class="fas fa-tasks text-blue-500"></i> Tasks
+                </h2>
+                <form id="taskForm" class="space-y-4 mb-6">
+                    <div>
+                <input type="text" id="taskTitle" placeholder="What needs to be done?" 
+                       class="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300">
+                    </div>
+                    <div class="flex gap-4">
+                        <input type="datetime-local" id="taskDeadline" 
+                               class="flex-1 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <select id="taskCategory" 
+                                class="flex-1 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="work">Work</option>
+                            <option value="personal">Personal</option>
+                            <option value="study">Study</option>
+                        </select>
+                    </div>
+                <button type="submit" 
+                        class="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 rounded-lg hover:from-blue-600 hover:to-purple-700 transform transition-all duration-300 hover:shadow-lg">
+                        Add Task
+                    </button>
+                </form>
+                <div id="taskList" class="space-y-3">
+                    <!-- Tasks will be dynamically added here -->
+                </div>
+            </section>
+
+            <!-- Focus Mode Section -->
+            <section class="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-8 transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                <h2 class="text-xl font-semibold mb-4">
+                    <i class="fas fa-clock text-blue-500"></i> Focus Mode
+                </h2>
+                <div class="text-center">
+            <div id="timer" class="text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600 mb-8 timer-display">25:00</div>
+                    <div class="flex justify-center gap-4">
+            <button id="startTimer" class="px-8 py-3 bg-gradient-to-r from-green-400 to-green-500 text-white rounded-lg hover:from-green-500 hover:to-green-600 transform transition-all duration-300 hover:shadow-lg">
+                            <i class="fas fa-play"></i> Start
+                        </button>
+            <button id="pauseTimer" class="px-8 py-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-white rounded-lg hover:from-yellow-500 hover:to-yellow-600 transform transition-all duration-300 hover:shadow-lg" disabled>
+                            <i class="fas fa-pause"></i> Pause
+                        </button>
+            <button id="resetTimer" class="px-8 py-3 bg-gradient-to-r from-red-400 to-red-500 text-white rounded-lg hover:from-red-500 hover:to-red-600 transform transition-all duration-300 hover:shadow-lg">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Motivational Prompts Section -->
+            <section class="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-8 transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                <h2 class="text-xl font-semibold mb-4">
+                    <i class="fas fa-quote-left text-blue-500"></i> Daily Motivation
+                </h2>
+                <div class="text-center">
+                    <p id="quote" class="text-lg text-gray-700 italic mb-4">
+                        "Success is not final, failure is not fatal: it is the courage to continue that counts."
+                    </p>
+            <button id="newQuote" class="px-8 py-3 bg-gradient-to-r from-purple-400 to-purple-600 text-white rounded-lg hover:from-purple-500 hover:to-purple-700 transform transition-all duration-300 hover:shadow-lg">
+                        <i class="fas fa-sync"></i> New Quote
+                    </button>
+                </div>
+            </section>
+
+            <!-- Progress Tracking Section -->
+            <section class="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-8 transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                <h2 class="text-xl font-semibold mb-4">
+                    <i class="fas fa-chart-line text-blue-500"></i> Progress
+                </h2>
+                <div>
+                    <div class="mb-4">
+                        <h3 class="text-sm font-medium text-gray-600 mb-2">Daily Progress</h3>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div id="progressBar" class="bg-blue-500 h-2.5 rounded-full" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 text-center">
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <p class="text-sm text-gray-600">Tasks Completed</p>
+                            <p id="tasksCompleted" class="text-2xl font-bold text-blue-500">0</p>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <p class="text-sm text-gray-600">Current Streak</p>
+                            <p id="currentStreak" class="text-2xl font-bold text-green-500">0</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="container mx-auto px-4 py-6 text-center text-gray-600">
+        <p>Stay focused, stay productive!</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="main.js"></script>
+</body>
+</html>
